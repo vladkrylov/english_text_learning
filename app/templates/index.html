@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% if message %}
+    <h2>{{ message }}</h2>
+{% else %}
+    <h2>Hello from Flask!</h2>
+{% endif %}
+
+{% endblock %}
+
