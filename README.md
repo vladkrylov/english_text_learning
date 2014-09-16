@@ -1,0 +1,1 @@
+This is a Flask project for learning English texts.

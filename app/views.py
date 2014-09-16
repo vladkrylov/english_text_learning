@@ -1,4 +1,5 @@
 from app import app
+
 from flask import render_template, request, redirect, flash, url_for
 from models import db, Text
 from forms import AddTextForm
@@ -27,6 +28,5 @@ def addtext():
 def viewtext(text_id):
     text = Text.query.get_or_404(text_id)
 
-    return render_template("viewtext.html", text = text.body)
-
+    return render_template("viewtext.html", text = text.body.split('\n'))
 
