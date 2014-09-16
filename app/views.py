@@ -26,7 +26,16 @@ def addtext():
 
 @app.route("/texts/<text_id>")
 def viewtext(text_id):
-    text = Text.query.get_or_404(text_id)
+    text_obj = Text.query.get_or_404(text_id)
 
-    return render_template("viewtext.html", text = text.body.split('\n'))
+    return render_template("viewtext.html", text = text_obj.body.split('\n'))
+
+@app.route("/tasks/<text_id>")
+def task(text_id):
+    text_obj = Text.query.get_or_404(text_id)
+    text = text_obj.body
+    
+    lines = [[w for w in s.split()] for s in text.split('\n')]
+    return render_template("task.html", lines = lines)
+
 
