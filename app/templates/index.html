@@ -1,10 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-{% if message %}
-    <h2>{{ message }}</h2>
-{% else %}
-    <h2>Hello from Flask!</h2>
-{% endif %}
-
+    <div class="container">
+        <h2>Welcome!</h2>
+        <div class="row">
+            {% if recent_texts %}
+            <div class="col-lg-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Resent texts</h3>
+                    </div>
+                    <ul class="list-group">
+                    {% for t in recent_texts %}
+                        <li class="list-group-item"><a href="{{ url_for('task', text_id = t.id) }}">{{ t.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-lg-8">
+                <p class="text-holder">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elementum rutrum est ut sollicitudin. Donec sed tristique purus. Duis blandit dictum vulputate. Aenean consectetur porttitor felis, vel aliquet ligula elementum ac. Maecenas a tempor lorem. Nulla tincidunt vulputate erat vel aliquet. Mauris at finibus sapien, sit amet blandit arcu. Mauris eleifend sit amet ex ut egestas. Pellentesque vitae purus et nunc mattis gravida. Mauris et commodo lorem, ac gravida neque. Phasellus laoreet bibendum urna, a blandit arcu. Praesent in fermentum nisi, sed suscipit purus. Nam ut massa at enim consequat finibus at sed tellus. Nullam quis nibh lectus.
+        
+                    Mauris feugiat dolor tristique velit finibus tristique. Curabitur vitae est a tellus dictum tempor. Donec scelerisque pharetra dolor non sodales. Etiam accumsan pretium nunc, non tempor velit lobortis ac. Fusce ultricies posuere neque quis varius. Nullam quis metus metus. Nullam turpis justo, volutpat et diam eu, porttitor ornare felis. Suspendisse lacinia vestibulum metus, vehicula suscipit augue convallis eu. Phasellus elit lorem, posuere sed metus vel, maximus vehicula quam. Morbi vitae felis non dolor sollicitudin iaculis et ac ante. Donec faucibus urna at odio bibendum varius. Donec in enim at arcu efficitur imperdiet. Etiam eget ex sit amet risus ultrices efficitur. Suspendisse ut ipsum est. Phasellus molestie, ex ullamcorper faucibus feugiat, dolor ligula pulvinar erat, sed iaculis mi leo a metus. Pellentesque nec laoreet nisl.
+        
+                    Aliquam at neque orci. Vestibulum ac sem molestie, iaculis justo a, molestie arcu. Fusce ac suscipit sem. Donec sapien lorem, scelerisque vel pharetra et, efficitur laoreet sem. Etiam vel iaculis turpis, nec elementum massa. Duis accumsan pharetra ultrices. Mauris quam urna, aliquet sed venenatis ut, hendrerit et elit. Pellentesque ultricies, elit ac tempus dictum, justo enim fermentum tellus, eu dapibus ligula augue ac mi. Etiam vitae leo magna. In id imperdiet est. Nunc at nisi aliquam, dignissim metus at, scelerisque sapien. Nunc pretium bibendum arcu, vel euismod nisl facilisis ut. Nam commodo turpis in velit eleifend aliquam. Pellentesque vel nisl et tortor vestibulum mattis.
+        
+                    Duis tempus congue imperdiet. Mauris at tortor mauris. Pellentesque convallis ante at porttitor ullamcorper. Proin eros lacus, mattis et libero et, rhoncus ornare mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque a nunc in diam mollis porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec a eleifend lacus. Donec aliquet ornare faucibus. Morbi volutpat, ipsum sed cursus accumsan, magna nunc ultrices diam, non tristique justo felis sit amet felis. Sed ut hendrerit turpis. Cras scelerisque nibh mollis condimentum fringilla.
+        
+                    Curabitur et sem non dolor vestibulum venenatis quis eget libero. Fusce vitae justo sed nisl viverra malesuada quis ut lectus. Nullam nulla dui, sagittis a eros pellentesque, congue congue odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur et scelerisque neque. Donec non pulvinar eros. Praesent ultrices posuere vehicula. Nullam et gravida velit. Aliquam aliquet iaculis suscipit.
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

@@ -2,12 +2,19 @@ from app import app
 
 from flask import render_template, request, redirect, flash, url_for
 from models import db, Text
-from forms import AddTextForm
+from forms import AddTextForm, PhraseForm
+
+from sqlalchemy import desc
+
+@app.route("/test")
+def test():
+    return render_template("test.html")
 
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    recent_texts = Text.query.order_by(Text.id.desc()).limit(10)
+    return render_template("index.html", recent_texts = recent_texts)
 
 @app.route("/addtext", methods = ['GET', 'POST'])
 def addtext():
@@ -30,12 +37,16 @@ def viewtext(text_id):
 
     return render_template("viewtext.html", text = text_obj.body.split('\n'))
 
-@app.route("/tasks/<text_id>")
+@app.route("/tasks/<text_id>", methods = ['GET', 'POST'])
 def task(text_id):
+    form = PhraseForm()
+    if form.validate_on_submit():
+        return redirect(url_for("task", text_id = text_id))
+    
     text_obj = Text.query.get_or_404(text_id)
     text = text_obj.body
     
     lines = [[w for w in s.split()] for s in text.split('\n')]
-    return render_template("task.html", lines = lines)
+    return render_template("task.html", lines = lines, form = form)
 
 
