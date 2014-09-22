@@ -9,8 +9,8 @@ $(document).ready ->
     oldValue = phraseField.val()
     if oldValue isnt ""
       oldValue += " "
-      
-    phraseField.val( oldValue + $(this).text().replace(/\s+/g, '') )
-
-
+    phraseField.val( oldValue + $(this).text().replace(/\s+/g, '').replace(/[\.,\/#!?$%\^&\*;:{}=\_"`~()]/g,"") )
+    
+  $("#clearphrase").click ->
+    phraseField.val("")
 

@@ -9,13 +9,16 @@
     phraseField = $("#phrase");
     phraseText = phraseField.val();
     console.log(phraseText);
-    return $(".choosable").click(function() {
+    $(".choosable").click(function() {
       var oldValue;
       oldValue = phraseField.val();
       if (oldValue !== "") {
         oldValue += " ";
       }
-      return phraseField.val(oldValue + $(this).text().replace(/\s+/g, ''));
+      return phraseField.val(oldValue + $(this).text().replace(/\s+/g, '').replace(/[\.,\/#!?$%\^&\*;:{}=\_"`~()]/g, ""));
+    });
+    return $("#clearphrase").click(function() {
+      return phraseField.val("");
     });
   });
 

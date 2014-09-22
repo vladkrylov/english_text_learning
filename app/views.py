@@ -1,10 +1,11 @@
 from app import app
 
 from flask import render_template, request, redirect, flash, url_for
-from models import db, Text
+from models import db, Text, Phrase, Tense
 from forms import AddTextForm, PhraseForm
 
 from sqlalchemy import desc
+from app.models import Tense
 
 @app.route("/test")
 def test():
@@ -41,12 +42,26 @@ def viewtext(text_id):
 def task(text_id):
     form = PhraseForm()
     if form.validate_on_submit():
+        tense_shortname = form.tense.data
+        print tense_shortname
+        
+        new_phrase = Phrase(body=form.phrase.data,
+                            text=Text.query.get(text_id),
+                            tense=Tense.query.filter_by(short_name=tense_shortname).first())
+        db.session.add(new_phrase)
+        db.session.commit()
+        
         return redirect(url_for("task", text_id = text_id))
     
     text_obj = Text.query.get_or_404(text_id)
     text = text_obj.body
-    
     lines = [[w for w in s.split()] for s in text.split('\n')]
-    return render_template("task.html", lines = lines, form = form)
+
+    tenses = Tense.query.all()
+    
+    return render_template("task.html", title = text_obj.title, 
+                                        lines = lines, 
+                                        form = form,
+                                        tenses = tenses)
 
 

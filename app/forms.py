@@ -2,6 +2,8 @@ from flask_wtf import Form
 from wtforms import TextField, TextAreaField, BooleanField, SelectField
 from wtforms.validators import Required
 
+from models import Tense
+
 class LoginForm(Form):
     openid = TextField(u"openid", validators = [Required()])
     remember_me = BooleanField(u"remember_me", default = False)
@@ -15,9 +17,18 @@ class AddTextForm(Form):
     text = TextAreaField(u"text", validators = [Required()])
     
 class PhraseForm(Form):
+    all_tenses = None 
+    
     phrase = TextField(u"phrase", validators = [Required()])
-    tense = SelectField(u"tense", validators = [Required()], choices = [("prs", "Present Simple"),
-                                                              ("prc", "Present Continuous"),
-                                                              ("prp", "Present Perfect")
-                                                              ])
-
+    tense = SelectField(u"tense", validators = [Required()])
+    
+    def __init__(self):
+        super(PhraseForm, self).__init__()
+        self.tense.choices = self.GetTensesForSelect()
+        
+    def GetTensesForSelect(self):
+        if PhraseForm.all_tenses is None:
+            PhraseForm.all_tenses = [(t.short_name, t.name) for t in Tense.query.all()]
+            print "Database request here!"
+        
+        return PhraseForm.all_tenses
