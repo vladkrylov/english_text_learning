@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         {% if form %}
-        <div class="col-lg-3">
+        <div class="col-lg-3 ap-form">
             <form action="" method="post" name="addphrase">
                 {{form.hidden_tag()}}
                 <div class="form-group">
@@ -26,7 +26,8 @@
             <br /><br />
         </div>
         {% endif %}
-        <div class="text-holder col-lg-9">
+        <div class="col-lg-4"></div>
+        <div class="text-holder col-lg-8">
             <h2>{{ title }}</h2><br />
             <p>
             {% for line in lines %}

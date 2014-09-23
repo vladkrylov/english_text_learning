@@ -17,3 +17,7 @@ body {
 .btn-clear {
 	color: red;
 }
+
+.ap-form {
+	position: fixed;
+}
