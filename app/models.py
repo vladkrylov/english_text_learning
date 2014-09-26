@@ -43,6 +43,8 @@ class Phrase(db.Model):
         self.text = text
         self.tense = tense
     
+    def __repr__(self):
+        return "Phrase object\n Body: %s\n Text id: %d\n Tense_id %d\n" % (self.body, self.text_id, self.tense_id)
     
 
     
